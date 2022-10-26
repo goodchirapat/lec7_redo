@@ -1,0 +1,15 @@
+
+<table>
+<th>Subject</th>
+<th>Score</th>
+<th>Edit</th>
+<th>Delete</th>
+<% @scores.each do |s| %>
+    <tr>
+        <td><%= s.subject %></td>
+        <td><%= s.point %></td>
+        <td><%= link_to 'Edit', '/scores/'+s.id.to_s+'/edit'  %></td>
+        <td><%= button_to "Delete", s, method: :delete %></td>
+    </tr>
+<%end%>
+</table>
