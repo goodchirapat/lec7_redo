@@ -58,23 +58,27 @@ class StudentsController < ApplicationController
   end
 
   def edit_score
-    @scores=@student.scores
-    @max=@scores[0].point
-    @total=0
-    @ans=@scores[0].subject
-    for @i in @scores
-      @total=@total+@i.point.to_i
-      if @i.point>@max
-        @ans=@i.subject
+      @scores=@student.scores
+      @max=@scores[0].point
+      @total=0
+      @ans=@scores[0].subject
+      for @i in @scores
+        @total=@total+@i.point.to_i
+        if @i.point>@max
+          @ans=@i.subject
+        end
       end
-    end
-    @avg=@total/@scores.length.to_f
+      @avg=@total/@scores.length.to_f
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      @student = Student.find(params[:id])
+      if Student.where(id:params[:id]).count >0
+        @student = Student.find(params[:id])
+      else
+        redirect_to students_path,notice: 'cannot find student'
+      end
     end
 
     # Only allow a list of trusted parameters through.

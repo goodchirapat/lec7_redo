@@ -1,4 +1,13 @@
-
+<p> average score =
+<%=
+    @avg
+    
+%></p>
+<p> max score subject =
+<%=
+    @ans
+    
+%></p>
 <table>
 <th>Subject</th>
 <th>Score</th>
@@ -8,8 +17,10 @@
     <tr>
         <td><%= s.subject %></td>
         <td><%= s.point %></td>
-        <td><%= link_to 'Edit', '/scores/'+s.id.to_s+'/edit'  %></td>
+        <td><%= link_to 'Edit', edit_score_path(s.id.to_s)  %></td>
         <td><%= button_to "Delete", s, method: :delete %></td>
     </tr>
 <%end%>
+
 </table>
+<%=link_to 'NEW', '/scores/new'  %>
